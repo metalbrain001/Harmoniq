@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "839130880338",
+    "project_id": "harmoniq-prod",
+    "storage_bucket": "harmoniq-prod.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839130880338:android:7fac89ffb776c4cd45828b",
+        "android_client_info": {
+          "package_name": "net.metalbrain.harmoniq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839130880338-9agmpvmhl10ba7snqnhlciud7sdlfj1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.metalbrain.harmoniq",
+            "certificate_hash": "5b010ca3e743e63cb91fc750e7b60f3cd16ab2db"
+          }
+        },
+        {
+          "client_id": "839130880338-7ae7vhg0coc2opo3rllvs02re0q55sh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNwyEJauZgYIck0OKdk5rT01aJHS_ASUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839130880338-7ae7vhg0coc2opo3rllvs02re0q55sh8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "839130880338-7ej72qoa4hi3vk2rht8utrht8ve1ksv2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.metalbrain.harmoniq"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
