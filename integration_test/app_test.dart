@@ -6,7 +6,7 @@ import 'package:harmoniq/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('App Launch Tests', () {
+  group('App Launch Tests Succeed', () {
     testWidgets('App boots and shows login screen', (tester) async {
       app.main();
       await tester.pumpAndSettle();
