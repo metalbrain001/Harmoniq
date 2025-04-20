@@ -1,11 +1,11 @@
-// This code is a Flutter widget for a registration screen. It uses the GoRouter package for navigation and Firebase for authentication. The screen includes an email and password input form, a register button, and a link to the login screen. The AuthFormController manages the state of the input fields. When the register button is pressed, it attempts to register the user with Firebase and shows a snackbar message based on the result.
+// This code is part of the Harmoniq app, which is a Flutter application.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:harmoniq/core/widgets/register_button.dart';
 import 'package:harmoniq/core/services/auth_service.dart';
 import 'package:harmoniq/features/auth/widgets/auth_form.dart';
 import 'package:harmoniq/features/auth/controllers/auth_form_controller.dart';
-import 'package:harmoniq/features/auth/widgets/auth_layout.dart'; // 👈 Add this import
+import 'package:harmoniq/features/auth/widgets/auth_layout.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('Welcome, ${user.email}!')));
-        context.goNamed('home'); // ✅ Consistent GoRouter redirect
+        context.goNamed('home');
       }
     } catch (e) {
       if (!mounted) return;
@@ -55,25 +55,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return AuthLayout(
-      child: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              AuthForm(
-                emailController: _form.emailController,
-                passwordController: _form.passwordController,
+      child: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                left: 24,
+                right: 24,
+                top: 24,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
               ),
-              const SizedBox(height: 20),
-              RegisterButton(onPressed: _handleRegister),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () => context.goNamed('login'),
-                child: const Text('Already have an account? Login'),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      AuthForm(
+                        emailController: _form.emailController,
+                        passwordController: _form.passwordController,
+                      ),
+                      const SizedBox(height: 20),
+                      RegisterButton(onPressed: _handleRegister),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () => context.goNamed('login'),
+                        child: const Text('Already have an account? Login'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

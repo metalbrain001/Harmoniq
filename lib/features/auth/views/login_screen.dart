@@ -55,33 +55,48 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return AuthLayout(
-      child: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AuthForm(
-                emailController: _form.emailController,
-                passwordController: _form.passwordController,
+      child: SafeArea(
+        // ✅ Prevent UI overflow on notched/curved devices
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                left: 24,
+                right: 24,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+                top: 24,
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _handleLogin,
-                child: const Text('Login'),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AuthForm(
+                        emailController: _form.emailController,
+                        passwordController: _form.passwordController,
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: _handleLogin,
+                        child: const Text('Login'),
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () {
+                          context.goNamed('register');
+                        },
+                        child: const Text('Create an account'),
+                      ),
+                      const Divider(),
+                      const SizedBox(height: 10),
+                      const GoogleLoginButton(),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  context.goNamed('register');
-                },
-                child: const Text('Create an account'),
-              ),
-              const Divider(),
-              const SizedBox(height: 10),
-              const GoogleLoginButton(),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

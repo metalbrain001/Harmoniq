@@ -7,15 +7,27 @@ import 'package:harmoniq/core/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:harmoniq/core/services/theme_provider.dart';
 
-void main() async {
-  // Initialize Firebase
+// void main() async {
+//   // Initialize Firebase
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+//   FlutterError.onError = (FlutterErrorDetails details) {
+//     debugPrint("🌋 Flutter Error: ${details.exceptionAsString()}");
+//   };
+//   // Run the app
+//   // runApp(const MyApp());
+//   runApp(const ProviderScope(child: MyApp()));
+// }
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FlutterError.onError = (FlutterErrorDetails details) {
-    debugPrint("🌋 Flutter Error: ${details.exceptionAsString()}");
-  };
-  // Run the app
-  // runApp(const MyApp());
+
+  const isTestEnv = bool.fromEnvironment('FLUTTER_TEST', defaultValue: false);
+  if (!isTestEnv) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
