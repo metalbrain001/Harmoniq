@@ -34,6 +34,3 @@ jobs:
 
       - name: 🧪 Run tests
         run: flutter test
-
-      - name: 📦 Build Android (optional)
-        run: flutter build apk --debug
