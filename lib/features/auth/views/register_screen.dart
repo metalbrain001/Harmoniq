@@ -1,11 +1,11 @@
-// This code is part of the Harmoniq app, which is a Flutter application.
+// lib/features/auth/views/register_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:harmoniq/core/widgets/register_button.dart';
 import 'package:harmoniq/core/services/auth_service.dart';
 import 'package:harmoniq/features/auth/widgets/auth_form.dart';
-import 'package:harmoniq/features/auth/controllers/auth_form_controller.dart';
 import 'package:harmoniq/features/auth/widgets/auth_layout.dart';
+import 'package:harmoniq/features/auth/controllers/auth_form_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -30,6 +30,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> _handleRegister() async {
+    if (!_form.validate()) return;
+
     final email = _form.email;
     final password = _form.password;
     final authService = AuthService();
@@ -39,10 +41,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (!mounted) return;
 
       if (user != null) {
+        context.goNamed('home');
+      } else {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Welcome, ${user.email}!')));
-        context.goNamed('home');
+        ).showSnackBar(const SnackBar(content: Text('Registration failed')));
       }
     } catch (e) {
       if (!mounted) return;
@@ -57,37 +60,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return AuthLayout(
       child: SafeArea(
         child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              padding: EdgeInsets.only(
-                left: 24,
-                right: 24,
-                top: 24,
-                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-              ),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      AuthForm(
-                        emailController: _form.emailController,
-                        passwordController: _form.passwordController,
-                      ),
-                      const SizedBox(height: 20),
-                      RegisterButton(onPressed: _handleRegister),
-                      const SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () => context.goNamed('login'),
-                        child: const Text('Already have an account? Login'),
-                      ),
-                    ],
-                  ),
+          builder:
+              (context, constraints) => SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Create an account',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    const SizedBox(height: 16),
+                    AuthForm(
+                      formKey: _form.formKey,
+                      emailController: _form.emailController,
+                      passwordController: _form.passwordController,
+                      isRegister: true,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: _handleRegister,
+                      child: const Text('Register'),
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () {
+                        context.goNamed('login');
+                      },
+                      child: const Text('Already have an account? Log in'),
+                    ),
+                  ],
                 ),
               ),
-            );
-          },
         ),
       ),
     );

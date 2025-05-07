@@ -2,10 +2,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:harmoniq/core/models/auth_user_model.dart';
 import 'package:harmoniq/core/contracts/i_auth_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:harmoniq/core/services/log_service.dart';
 
 class AuthService implements IAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  // authStateChanges
+  FirebaseAuth get auth => _auth;
+  GoogleSignIn get googleSignIn => _googleSignIn;
+
+  // ✅ Anonymous Sign-In
+  Future<AuthUserModel?> signInAnonymously() async {
+    try {
+      final result = await _auth.signInAnonymously();
+      return AuthUserModel.fromFirebaseUser(result.user);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   // ✅ Google Sign-In
   Future<AuthUserModel?> signInWithGoogle() async {
@@ -44,6 +59,11 @@ class AuthService implements IAuthService {
       email: email,
       password: password,
     );
+    if (result.user == null) {
+      LogService.d('User registration failed');
+      return null;
+    }
+    LogService.d('User registered with email: $email');
     return result.user != null
         ? AuthUserModel.fromFirebaseUser(result.user)
         : null;

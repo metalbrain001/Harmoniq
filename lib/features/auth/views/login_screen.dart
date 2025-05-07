@@ -1,9 +1,10 @@
+// lib/features/auth/views/login_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:harmoniq/core/services/auth_service.dart';
 import 'package:harmoniq/features/auth/controllers/auth_form_controller.dart';
 import 'package:harmoniq/features/auth/widgets/auth_form.dart';
-import 'package:harmoniq/core/widgets/google_login_button.dart';
 import 'package:harmoniq/features/auth/widgets/auth_layout.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _handleLogin() async {
+    if (!_form.validate()) return;
+
     final email = _form.email;
     final password = _form.password;
     final authService = AuthService();
@@ -56,47 +59,69 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return AuthLayout(
       child: SafeArea(
-        // ✅ Prevent UI overflow on notched/curved devices
         child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              padding: EdgeInsets.only(
-                left: 24,
-                right: 24,
-                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-                top: 24,
-              ),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AuthForm(
-                        emailController: _form.emailController,
-                        passwordController: _form.passwordController,
-                      ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: _handleLogin,
-                        child: const Text('Login'),
-                      ),
-                      const SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () {
-                          context.goNamed('register');
-                        },
-                        child: const Text('Create an account'),
-                      ),
-                      const Divider(),
-                      const SizedBox(height: 10),
-                      const GoogleLoginButton(),
-                    ],
+          builder:
+              (context, constraints) => SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Welcome Back',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                        const SizedBox(height: 16),
+                        AuthForm(
+                          formKey: _form.formKey,
+                          emailController: _form.emailController,
+                          passwordController: _form.passwordController,
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          onPressed: _handleLogin,
+                          child: const Text('Login'),
+                        ),
+                        const SizedBox(height: 10),
+                        TextButton(
+                          onPressed: () => context.goNamed('forgot_password'),
+                          child: const Text(
+                            'Forgot password?',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => context.goNamed('register'),
+                          child: const Text(
+                            'Create an account',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        const SizedBox(height: 10),
+                        const Text(
+                          'Or login with',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            );
-          },
         ),
       ),
     );

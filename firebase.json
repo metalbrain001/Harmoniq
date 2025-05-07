@@ -1,1 +1,82 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"harmoniq-prod","appId":"1:839130880338:android:7fac89ffb776c4cd45828b","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"harmoniq-prod","appId":"1:839130880338:ios:70c861f89ae7c76345828b","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"harmoniq-prod","appId":"1:839130880338:ios:70c861f89ae7c76345828b","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"harmoniq-prod","configurations":{"android":"1:839130880338:android:7fac89ffb776c4cd45828b","ios":"1:839130880338:ios:70c861f89ae7c76345828b","macos":"1:839130880338:ios:70c861f89ae7c76345828b"}}}}}}
+{
+  "emulators": {
+    "projectId": "harmoniq-prod",
+    "firestore": {
+      "port": 8085,
+      "rules": "firestore.rules"
+    },
+    "storage": {
+      "port": 9199,
+      "rules": "storage.rules"
+    },
+    "auth": {
+      "port": 9099
+    },
+    "pubsub": {
+      "port": 8083
+    },
+    "tasks": {
+      "port": 9499
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "harmoniq-prod",
+          "appId": "1:839130880338:android:7fac89ffb776c4cd45828b",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "harmoniq-prod",
+          "appId": "1:839130880338:ios:70c861f89ae7c76345828b",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "harmoniq-prod",
+          "appId": "1:839130880338:ios:70c861f89ae7c76345828b",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "harmoniq-prod",
+          "configurations": {
+            "android": "1:839130880338:android:7fac89ffb776c4cd45828b",
+            "ios": "1:839130880338:ios:70c861f89ae7c76345828b",
+            "macos": "1:839130880338:ios:70c861f89ae7c76345828b"
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "venv",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}

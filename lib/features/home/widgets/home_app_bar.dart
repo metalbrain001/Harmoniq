@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:harmoniq/core/services/auth_service.dart';
+import 'package:harmoniq/core/theme/app_colors.dart';
 import 'package:harmoniq/core/widgets/theme_toggle_button.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -25,7 +26,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: AppColors.appBarBackground,
       leading: Builder(
         builder:
             (context) => IconButton(
@@ -50,5 +51,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

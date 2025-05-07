@@ -45,6 +45,10 @@ dependencies:
   google_sign_in: ^6.3.0
   flutter_signin_button: ^2.0.0
   flutter_riverpod: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+  with_opacity: ^0.0.2
+  confetti: ^0.8.0
+  smooth_page_indicator: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -73,8 +77,15 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/logo.png
+    - assets/icons/icon.png
+    - assets/icons/icon2.png
+    - assets/icons/harmoniq.png
+    - assets/images/background.png
+    - assets/images/background1.png
+    - assets/images/background2.png
+    - assets/images/background3.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
