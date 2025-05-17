@@ -3,13 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:harmoniq/core/services/auth_service.dart';
 import 'package:harmoniq/core/theme/app_colors.dart';
 import 'package:harmoniq/core/widgets/theme_toggle_button.dart';
+import 'package:harmoniq/helper/enum/app_enum.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+  const HomeAppBar({super.key, this.context});
+  final BuildContext? context;
 
   void _logout(BuildContext context) async {
-    await AuthService().signOut();
-    if (context.mounted) context.goNamed('login');
+    await AuthService().signOut(context);
+    if (context.mounted) context.goNamed(AppRoute.welcomeBack.name);
   }
 
   void _openNotifications(BuildContext context) {
@@ -45,6 +47,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.logout),
           onPressed: () => _logout(context),
+          tooltip: 'Logout',
+
+          // navigate to welcomeback screen
         ),
       ],
     );

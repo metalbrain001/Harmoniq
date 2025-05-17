@@ -169,3 +169,8 @@ app.*.map.json
 
 android/gradle/
 android/*.hprof
+
+# Certiificates
+AuthKey_9VX5YWL9YZ.p8
+CertificateSigningRequest.certSigningRequest
+development.cer

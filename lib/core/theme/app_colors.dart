@@ -22,7 +22,7 @@ class AppColors {
   static const onboardingBackground = Color(0xFF121212);
   static const onboardingPrimary = Color(0xFF00BFA5);
   static const onboardingSecondary = Color(0xFF80CBC4);
-  static const onboardingText = Color(0xFFB0BEC5);
+  static const onboardingText = Color(0xFF020100);
   static const onboardingButton = Color(0xFF00796B);
   static const onboardingButtonText = Color(0xFFFFFFFF);
   static const onboardingButtonBorder = Color(0xFF004D40);
@@ -93,4 +93,34 @@ class AppColors {
   static const cardPrimary = Color(0xFF00BFA5);
   static const cardSecondary = Color(0xFF80CBC4);
   static const cardText = Color(0xFFB0BEC5);
+
+  // Google Sign In
+  static const Gradient googleGradient = LinearGradient(
+    colors: [
+      Color(0xFF4285F4),
+      Color(0xFF34A853),
+      Color(0xFFFBBC05),
+      Color(0xFFEA4335),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Twitter Sign In
+  static const Gradient twitterGradient = LinearGradient(
+    colors: [Color(0xFF1DA1F2), Color(0xFF14171A)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // CheckBox color
+  static const checkBoxBackground = Color(0xFF121212);
+  static const checkBoxPrimary = Color(0xFF00BFA5);
+  static const checkBoxSecondary = Color(0xFF80CBC4);
+  static const checkBoxText = Color(0xFFB0BEC5);
+  static const checkBoxBorder = Color(0xFF004D40);
+  static const checkBoxTerms = Color(0xFF004D40);
+  // static const checkBoxError = Color(0xFFB00020);
+  static const checkBoxError = Color(0xFF80CBC4);
+  static const checkBoxDisabled = Color(0xFFB0BEC5);
 }

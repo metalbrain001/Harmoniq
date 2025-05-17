@@ -6,6 +6,8 @@ import 'package:harmoniq/core/constants/button_enum.dart';
 import 'package:harmoniq/core/theme/app_colors.dart';
 import 'package:harmoniq/core/widgets/mini_loader.dart';
 
+enum Provider { google, apple, facebook }
+
 class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
@@ -17,6 +19,9 @@ class AppButton extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  // Support for Gradient background color
+  final Gradient? gradient;
+  final BoxDecoration? gradientBackground;
 
   const AppButton({
     super.key,
@@ -30,6 +35,8 @@ class AppButton extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
     this.backgroundColor,
     this.foregroundColor,
+    this.gradient,
+    this.gradientBackground,
   });
 
   double getHeight() {
@@ -117,7 +124,7 @@ class AppButton extends StatelessWidget {
 
     final VoidCallback? action = enabled && !loading ? onPressed : null;
 
-    return switch (type) {
+    final button = switch (type) {
       ButtonType.outline => OutlinedButton(
         onPressed: action,
         style: style,
@@ -126,5 +133,11 @@ class AppButton extends StatelessWidget {
       ButtonType.primary || ButtonType.secondary || ButtonType.danger =>
         ElevatedButton(onPressed: action, style: style, child: content),
     };
+    return gradient != null
+        ? Container(
+          decoration: gradientBackground,
+          child: ClipRRect(borderRadius: borderRadius, child: button),
+        )
+        : button;
   }
 }

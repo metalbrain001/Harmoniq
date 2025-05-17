@@ -13,6 +13,31 @@
         <string>com.googleusercontent.apps.839130880338-7ej72qoa4hi3vk2rht8utrht8ve1ksv2</string>
       </array>
     </dict>
+		<!-- 🔐 Facebook Login Support -->
+		<dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.metalbrain.harmoniq</string>
+    </array>
+  </dict>
+		<!-- 🔐 Twitter Login -->
+		<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>twitterkit-TG3lKUJ3wRz8kTWc4tMakiUv8></string>
+		</array>
+		</dict>
+		<!--Biometric-->
+		<dict>
+		<key>NSFaceIDUsageDescription</key>
+		<array>
+		  <string>We use Face ID to authenticate you.</string>
+		</array>
+		</dict>
   </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

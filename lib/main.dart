@@ -1,3 +1,4 @@
+// import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -21,6 +22,11 @@ Future<void> main() async {
     FirebaseFirestore.instance.useFirestoreEmulator(host, 8085);
     LogService.d('🔥 Firebase emulator connected on iOS (localhost)');
   }
+  // if (kDebugMode && !Platform.isIOS) {
+  //   // Only use emulator on Android
+  //   await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  //   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8085);
+  // }
 
   // const isTestEnv = bool.fromEnvironment('FLUTTER_TEST', defaultValue: false);
   // if (!isTestEnv) {
@@ -41,6 +47,7 @@ class MyApp extends ConsumerWidget {
     final themeMode = ref.watch(themeModeProvider);
     LogService.d('Harmoniq App started');
     return MaterialApp.router(
+      // Add font family to the app
       routerConfig: appRouter,
       title: 'Harmoniq',
       theme: AppTheme.light,

@@ -9,7 +9,7 @@ class AppBackground extends StatelessWidget {
   const AppBackground({
     super.key,
     required this.child,
-    this.imagePath = 'assets/images/background2.png',
+    this.imagePath = 'assets/images/voltsnow.png',
   });
 
   @override
